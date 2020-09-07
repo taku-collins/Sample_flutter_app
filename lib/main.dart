@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:innovative_farming/pages/HomePage.dart';
+import 'package:innovative_farming/pages/login/LoginPage.dart';
 
 void main() {
   runApp(MyApp());

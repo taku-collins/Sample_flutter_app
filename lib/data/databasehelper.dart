@@ -1,12 +1,13 @@
 import 'package:innovative_farming/models/user.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 import 'dart:async';
 import 'dart:io' as io;
 
 
 class DataBaseHelper{
-  static final DataBaseHelper _instance = new DataBaseHelper().internal();
+  static final DataBaseHelper _instance = new DataBaseHelper.internal();
   factory DataBaseHelper() => _instance;
 
   static Database  _db;
@@ -29,7 +30,7 @@ class DataBaseHelper{
     return ourDb;
   }
 
-  void _onCreate(Database db, int version) async{
+  void _onCreate(Database db, int version) async {
     await db.execute("CREATE TABLE User(id INTEGER KEY, username TEXT, password TEXT)");
     print("Table is created");
   }
