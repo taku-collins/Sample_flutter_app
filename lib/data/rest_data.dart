@@ -8,7 +8,7 @@ class RestData{
   static final Login_url = Base_url + "/";
 
   Future<User> login(String username, String password){
-    return null;
+    return new Future.value(new User( username, password));
   }
 
 }

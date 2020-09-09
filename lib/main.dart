@@ -10,7 +10,7 @@ final routes = {
   '/login': (BuildContext context) => new LoginPage(),
   '/home': (BuildContext context) => new HomePage(),
   '/': (BuildContext context) => new LoginPage(),
-}
+};
 
 class MyApp extends StatelessWidget {
 
