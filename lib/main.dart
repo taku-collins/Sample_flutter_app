@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Shopping App',
       theme: new ThemeData(
-        primarySwatch: Colors.pink,
+        primarySwatch: Colors.green,
       ),
       routes: routes,
     );

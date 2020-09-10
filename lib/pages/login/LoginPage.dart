@@ -85,7 +85,17 @@ void _submit(){
 
     );
     return new Scaffold(
-      appBar: new AppBar(title: new Text("Login"),
+      appBar: new AppBar(
+        leading: Icon(Icons.menu),
+        title: new Text("Login64"),
+        actions: [
+          Icon(Icons.favorite),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Icon(Icons.search),
+          ),
+          Icon(Icons.more_vert),
+        ],
       key: scaffoldKey,
         ),
       key: scaffoldKey,
