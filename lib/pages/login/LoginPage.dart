@@ -58,6 +58,7 @@ void _submit(){
       color: Colors.green,
     );
     var loginform = new Column(
+
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         new Text("Login to SQL app", textScaleFactor: 2.0,),
@@ -68,7 +69,7 @@ void _submit(){
                 new Padding(padding: const EdgeInsets.all(10.0),
                 child: new TextFormField(
                   onSaved: (val)=> _username = val,
-                  decoration: new InputDecoration(labelText: "Username"),
+                  decoration: new InputDecoration(labelText: "User name"),
                 ),
                 ),
                 new Padding(padding: const EdgeInsets.all(10.0),
@@ -84,6 +85,7 @@ void _submit(){
       ],
 
     );
+
     return new Scaffold(
       appBar: new AppBar(
         leading: Icon(Icons.menu),
