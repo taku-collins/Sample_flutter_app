@@ -19,6 +19,19 @@ class User{
     map["password"] = _password;
     return map; 
   }
+/*
+class user{
+      String key;
+      String username;
+      String password;
 
+      user(this.username, this.password);
+
+
+
+
+
+}
+ */
 
 }

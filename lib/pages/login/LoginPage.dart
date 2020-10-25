@@ -1,30 +1,46 @@
-import 'dart:html';
+//import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:innovative_farming/data/databasehelper.dart';
-import 'package:innovative_farming/models/user.dart';
-import 'package:innovative_farming/pages/login/login.dart';
+
+import 'package:innovative_farming/pages/product/addToCard.dart';
+import 'package:innovative_farming/pages/registration/registration.dart';
+import 'package:innovative_farming/pages/search/search.dart';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> implements LoginPageContract {
+class _LoginPageState extends State<LoginPage> {
   BuildContext _ctx;
   bool _isLoading;
-  final formKey = new GlobalKey<FormState>();
+  //final formKey = new GlobalKey<FormState>();
+
+  /*
+  DatabaseReference userRef;
+
+//for our ffor to validate, save  and get information out of the form
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+   */
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  String _username, _password;
+   String _username, _password;
 
-  LoginPagePresenter _presenter;
+  // LoginPagePresenter _presenter;
 
-  _LoginPageState() {
-    _presenter = new LoginPagePresenter(this);
-  }
-  void _submit() {
+  /*
+  @override
+  void initState(){
+  super.initState();
+   item = Item("","");
+   final FirebaseDatabase database = FirebaseDatabase(app: app);
+   itemRef = database.reference().child('items');
+   }
+   */
+  //  _LoginPageState() { //_presenter = new LoginPagePresenter(this); }
+  /*void _submit() {
     final form = formKey.currentState;
     if (form.validate()) {
       setState(() {
@@ -33,7 +49,7 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
         _presenter.doLogin(_username, _password);
       });
     }
-  }
+  }*/
 
   void _showSnackBar(String text) {
     scaffoldKey.currentState.showSnackBar(new SnackBar(
@@ -45,14 +61,12 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
   Widget build(BuildContext context) {
     _ctx = context;
     var loginBtn = new RaisedButton(
-      //onPressed: _submit,
-      onPressed: onmoceLogin,
+      onPressed: onMoveLogin,
       child: new Text("Login"),
-      color: Colors.green,
+      color: Colors.grey,
     );
 
-
-    var loginform = Card(
+    var loginForm = Card(
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
@@ -61,89 +75,165 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
             padding: const EdgeInsets.all(10.0),
             child: new TextFormField(
               onSaved: (val) => _username = val,
-              decoration: new InputDecoration(labelText: "Name"),
+              decoration: new InputDecoration(
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.purple,
+                ),
+                labelText: "Name",
+              ),
             ),
           ),
           new Padding(
             padding: const EdgeInsets.all(10.0),
-            child: new TextFormField(
+            child: TextFormField(
               onSaved: (val) => _password = val,
-              decoration: new InputDecoration(labelText: "Password"),
+              decoration: new InputDecoration(
+                  icon: Icon(
+                    Icons.lock,
+                    color: Colors.purple,
+                  ),
+                  labelText: "Password"),
             ),
           ),
-          /*               ButtonBar(
-                  alignment: MainAxisAlignment.start,
-                  children: [
-                    FlatButton(
-                      textColor: const Color(0xFF6200EE),
-                      onPressed: () {
-                        // Perform some action
-                      },
-                      child: const Text('ACTION 1'),
+          loginBtn,
+          SizedBox(
+            height: 25,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.grey,
+                child: IconButton(
+                    icon: Icon(
+                      Icons.phone,
+                      color: Colors.white,
                     ),
-                    FlatButton(
-                      textColor: const Color(0xFF6200EE),
-                      onPressed: () {
-                        // Perform some action
-                      },
-                      child: const Text('ACTION 2'),
+                    onPressed: null),
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.grey,
+                child: IconButton(
+                    icon: Icon(
+                      Icons.portrait,
+                      color: Colors.white,
                     ),
-                  ],
-                ),*/
-
-
-          loginBtn
+                    onPressed: null),
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.grey,
+                child: IconButton(
+                    icon: Icon(
+                      Icons.android,
+                      color: Colors.white,
+                    ),
+                    onPressed: null),
+              ),
+            ],
+          )
         ],
       ),
     );
 
-    /*new Column(
-
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        new Text("Login to SQL app", textScaleFactor: 2.0,),
-        new Form(
-            key: formKey,
-            child: new Column(
-              children: <Widget>[
-                new Padding(padding: const EdgeInsets.all(10.0),
-                child: new TextFormField(
-                  onSaved: (val)=> _username = val,
-                  decoration: new InputDecoration(labelText: "User name"),
-                ),
-                ),
-                new Padding(padding: const EdgeInsets.all(10.0),
-                  child: new TextFormField(
-                    onSaved: (val)=> _password = val,
-                    decoration: new InputDecoration(labelText: "Password"),
-                  ),
-                )
-              ],
-            ),
-        ),
-        loginBtn
-      ],
-
-    );
-*/
-    return new Scaffold(
-      appBar: new AppBar(
-        leading: Icon(Icons.menu),
-        title: new Text("Login64"),
+    return Scaffold(
+      appBar: AppBar(
+        /*leading: IconButton(icon: Icon(Icons.menu), onPressed: (){
+          //mathod for sidebar SideBarLayout();
+                  },
+        ),*/
+        title: new Text("Login"),
         actions: [
-          Icon(Icons.business),
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              //method for new scene
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => AddToCard()));
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.app_registration),
+            onPressed: () {
+              //method for new scene
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => registrationView()));
+            },
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Icon(Icons.search),
+            child: IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => search()));
+                //method for new scene
+              },
+            ),
           ),
           Icon(Icons.more_vert),
         ],
-        key: scaffoldKey,
+        // key: scaffoldKey,
       ),
-      key: scaffoldKey,
+      drawer: Drawer(
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.red,
+            ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Text(
+              "Name",
+              style: TextStyle(
+                fontSize: 22.0,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            Text(
+              "Navigation",
+              style: TextStyle(
+                fontSize: 15.0,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            ListTile(
+              onTap: () {},
+              leading: Icon(Icons.person),
+              title: Text("Account"),
+            ),
+            ListTile(
+              onTap: () {},
+              leading: Icon(Icons.notifications),
+              title: Text("Notification"),
+            ),
+            ListTile(
+              onTap: () {},
+              leading: Icon(Icons.lock_clock),
+              title: Text("Setting"),
+            ),
+          ],
+        ),
+      ),
+      //  key: scaffoldKey,
       body: new Container(
+        //scrollDirection:Axis.horizontal,
         child: new Center(
-          child: loginform,
+          child: loginForm,
         ),
       ),
     );
@@ -158,22 +248,10 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
     });
   }
 
-  @override
-  void onLoginSuccess(User user) async {
-    // TODO: implement onLoginSuccess
-    _showSnackBar(user.toString());
-    setState(() {
-      _isLoading = false;
-    });
-    var db = new DataBaseHelper();
-    await db.saveUser(user);
-    Navigator.of(context).pushNamed("/home");
-  }
 
 
   @override
-  void onmoceLogin ( ) async {
-
-    Navigator.of(context).pushNamed("/home");
+  void onMoveLogin() async {
+    Navigator.of(context).pushNamed('/home', arguments: 'cv');
   }
 }

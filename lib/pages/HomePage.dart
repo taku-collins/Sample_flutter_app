@@ -1,119 +1,109 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:innovative_farming/pages/message/message.dart';
+import 'package:innovative_farming/pages/product/listProduct.dart';
+import 'package:innovative_farming/pages/product/GridCard.dart';
+class HomePage extends StatelessWidget {
+  int _selectedIndex = 0;
 
- class HomePage extends StatelessWidget {
 
-   @override
-   Widget build(BuildContext context) {
-     return  DefaultTabController(
+
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
       length: 3,
-     child : Scaffold(
-       appBar: new AppBar(
-         title: new Text("Home"),
+      child: Scaffold(
+        appBar: new AppBar(
+          title: new Text("Home"),
           // automaticallyImplyLeading: false,
-         actions: [
-           Icon(Icons.notifications),
-           Padding(
-             padding: EdgeInsets.symmetric(horizontal: 20),
-             child: Icon(Icons.add_shopping_cart),
-           ),
-           Icon(Icons.more_vert),
-         ],
-         bottom: TabBar(
-           tabs: [
-             Tab(text: 'DOGS', icon: Icon(Icons.favorite)),
-             Tab(text: 'CATS', icon: Icon(Icons.music_note)),
-             Tab(text: 'BIRDS', icon: Icon(Icons.search)),
-           ],
-         ),
-
-       ),
-
-     body: TabBarView(
-         children: [
-           Center(child: Text('DOGS')),
-           Center(child: Text('CATS')),
-           Center(child: Text('BIRDS')),
-         ],
-       ),
-
-
-       bottomNavigationBar: BottomBar,
-
-
-     ),
-     );
-
-   }
-   
-   
-// Defining tabbar and controller
- /*  var TabBar =  DefaultTabController(
-       length: 3,
-     child: Scaffold(
-
-     bottom: TabBar(
-       tabs: [
-         Tab(text: 'DOGS', icon: Icon(Icons.favorite)),
-         Tab(text: 'CATS', icon: Icon(Icons.music_note)),
-         Tab(text: 'BIRDS', icon: Icon(Icons.search)),
-       ],
-     ),
-     body: TabBarView(
-       children: [
-         Center(child: Text('DOGS')),
-         Center(child: Text('CATS')),
-         Center(child: Text('BIRDS')),
-       ],
-     ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () {
+                //method for new scene
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => MessageView() ));
+              },
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: IconButton(
+                icon: Icon(Icons.add_shopping_cart),
+                onPressed: () {
+                  //method for new scene
+                },
+              ),
+            ),
+            Icon(
+              Icons.more_vert,
+            ),
+          ],
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'List', icon: Icon(Icons.favorite)),
+              Tab(text: 'Card', icon: Icon(Icons.book)),
+              Tab(text: 'Me', icon: Icon(Icons.person)),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            Column(
+              children: [
+                Center(
+                  child: itemCard(
+                    'assets/images/land.png',
+                  ),
+                ),
+              ],
+            ),
+            Center(child: gridCard( )),
+            Center(child: Text('BIRDS')),
+          ],
+        ),
+        bottomNavigationBar: BottomBar,
+      ),
+    );
+  }
 
 
-   ),
-   
-   
-   );
-   
-   */
-   
-   
-   
-   
-   
-   
 
-   // Bottom Bar
+  // Bottom Bar
 
   var BottomBar = BottomNavigationBar(
-   type: BottomNavigationBarType.fixed,
-   backgroundColor: Color(0xFF2E7D32),
-   selectedItemColor: Colors.white,
-   unselectedItemColor: Colors.white.withOpacity(.60),
-   selectedFontSize: 14,
-   unselectedFontSize: 14,
-   onTap: (value) {
-   // Respond to item press.
-   },
-   items: [
-   BottomNavigationBarItem(
-   title: Text('Favorites'),
-   icon: Icon(Icons.favorite),
-   ),
-   BottomNavigationBarItem(
-   title: Text('Music'),
-   icon: Icon(Icons.music_note),
-   ),
-   BottomNavigationBarItem(
-   title: Text('Places'),
-   icon: Icon(Icons.location_on),
-   ),
-   BottomNavigationBarItem(
-   title: Text('News'),
-   icon: Icon(Icons.library_books),
-   ),
-   ],
-   );
- }
+    type: BottomNavigationBarType.fixed,
+    backgroundColor: Colors.grey,
+    selectedItemColor: Colors.pink,
+    unselectedItemColor: Colors.white.withOpacity(.60),
+    selectedFontSize: 14,
+    unselectedFontSize: 14,
+    onTap: (value) {
+      // Respond to item press.
+    },
+    items: [
+      BottomNavigationBarItem(
+        title: Text('Favorites'),
+        icon: Icon(Icons.favorite),
+      ),
+      BottomNavigationBarItem(
+        title: Text('Places'),
+        icon: Icon(Icons.location_on),
+      ),
+      BottomNavigationBarItem(
+        title: Text('News'),
+        icon: Icon(Icons.library_books),
+      ),
+      BottomNavigationBarItem(
+        title: Text('Setting'),
+        icon: Icon(Icons.wc),
 
- //Controller
+      ),
+
+    ],
+  );
+}
+
+//Controller
 
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
@@ -139,36 +129,30 @@ ThemeData _buildShrineTheme() {
   );
 }
 
-
 IconThemeData _customIconTheme(IconThemeData original) {
   return original.copyWith(color: shrineBrown900);
 }
 
-
-
 TextTheme _buildShrineTextTheme(TextTheme base) {
   return base
       .copyWith(
-    caption: base.caption.copyWith(
-      fontWeight: FontWeight.w400,
-      fontSize: 14,
-      letterSpacing: defaultLetterSpacing,
-    ),
-    button: base.button.copyWith(
-      fontWeight: FontWeight.w500,
-      fontSize: 14,
-      letterSpacing: defaultLetterSpacing,
-    ),
-  )
+        caption: base.caption.copyWith(
+          fontWeight: FontWeight.w400,
+          fontSize: 14,
+          letterSpacing: defaultLetterSpacing,
+        ),
+        button: base.button.copyWith(
+          fontWeight: FontWeight.w500,
+          fontSize: 14,
+          letterSpacing: defaultLetterSpacing,
+        ),
+      )
       .apply(
-    fontFamily: 'Rubik',
-    displayColor: shrineBrown900,
-    bodyColor: shrineBrown900,
-  );
+        fontFamily: 'Rubik',
+        displayColor: shrineBrown900,
+        bodyColor: shrineBrown900,
+      );
 }
-
-
-
 
 const ColorScheme _shrineColorScheme = ColorScheme(
   primary: shrinePink100,
@@ -201,9 +185,9 @@ const Color shrineBackgroundWhite = Colors.white;
 
 const defaultLetterSpacing = 0.03;
 
+// https://stackoverflow.com/questions/49862572/multiple-widgets-used-the-same-globalkey
 
-
-
-//https://dartpad.dev/embed-flutter.html?gh_owner=material-components&gh_repo=material-components-flutter&gh_path=docs/components/dartpad/tabs/theme&gh_ref=develop
-
- 
+// https://material.io/develop/flutter/components/dialogs#
+//https://material.io/develop/flutter/components/lists
+//https://material.io/develop/flutter/components/cards
+//https://material.io/develop/flutter/components/floating-action-buttons
